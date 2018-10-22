@@ -188,45 +188,45 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xjR-Dy-5sb">
-                                <rect key="frame" x="0.0" y="88" width="414" height="207"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xjR-Dy-5sb">
+                                <rect key="frame" x="0.0" y="88" width="414" height="300"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="xjR-Dy-5sb" secondAttribute="height" multiplier="2:1" id="9HV-Ej-R9R"/>
+                                    <constraint firstAttribute="height" constant="300" id="LGQ-Pj-bEe"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AB Cleaning Services" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CtY-Sq-o6I">
-                                <rect key="frame" x="8" y="303" width="181.33333333333334" height="23"/>
+                                <rect key="frame" x="8" y="396" width="181.33333333333334" height="23"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lcx-fA-nQx">
-                                <rect key="frame" x="8" y="334" width="83" height="15"/>
+                                <rect key="frame" x="8" y="427" width="83" height="15"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="83" id="9AG-GG-iUF"/>
                                     <constraint firstAttribute="height" constant="15" id="JJg-nn-4iX"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="42 Reviews" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WG3-qv-9qx">
-                                <rect key="frame" x="99" y="334" width="74" height="17"/>
+                                <rect key="frame" x="99" y="427" width="74" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home Cleaning, Office Cleaning" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zhf-ma-6c0">
-                                <rect key="frame" x="8" y="359" width="181" height="15"/>
+                                <rect key="frame" x="8" y="452" width="181" height="15"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Closed Today" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oWg-XG-UJ0">
-                                <rect key="frame" x="8" y="382" width="77" height="15"/>
+                                <rect key="frame" x="8" y="475" width="77" height="15"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="cbf-EN-n4N">
-                                <rect key="frame" x="0.0" y="405" width="414" height="128"/>
+                                <rect key="frame" x="0.0" y="498" width="414" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="128" id="6lk-iv-5eg"/>
                                 </constraints>
@@ -258,6 +258,7 @@
                         <outlet property="businessImageView" destination="xjR-Dy-5sb" id="IaW-1z-EFf"/>
                         <outlet property="categoriesLabel" destination="zhf-ma-6c0" id="EVh-hC-zu9"/>
                         <outlet property="closedLabel" destination="oWg-XG-UJ0" id="KqK-kX-9FX"/>
+                        <outlet property="isClosedLabel" destination="oWg-XG-UJ0" id="xy9-aJ-fiv"/>
                         <outlet property="mapView" destination="cbf-EN-n4N" id="WzM-93-d3A"/>
                         <outlet property="nameLabel" destination="CtY-Sq-o6I" id="QCZ-La-mSm"/>
                         <outlet property="ratingImageView" destination="lcx-fA-nQx" id="2Jt-rT-4CK"/>

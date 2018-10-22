@@ -18,6 +18,7 @@ class BusinessDetailViewController: UIViewController {
     @IBOutlet weak var closedLabel: UILabel!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var reviewCountLabel: UILabel!
+    @IBOutlet weak var isClosedLabel: UILabel!
     
     var business:Business!
     override func viewDidLoad() {
@@ -28,10 +29,16 @@ class BusinessDetailViewController: UIViewController {
         categoriesLabel.text = business.categories
         reviewCountLabel.text = "\(business.reviewCount!) Reviews"
         addAnnotationAtAddress(address: business.address!, title: business.name!)
+        if let isClosed = business.isClosed {
+            if isClosed {
+                isClosedLabel.text = "Opens Today"
+                isClosedLabel.textColor = UIColor.green
+            }
+        }
     }
     
     func goTo(location:CLLocation) {
-        let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+        let span = MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001)
         let region = MKCoordinateRegion(center: location.coordinate, span: span)
         mapView.setRegion(region, animated: false)
     }
