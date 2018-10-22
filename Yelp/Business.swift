@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Business: NSObject {
+class Business:NSObject {
     let name: String?
     let address: String?
     let imageURL: URL?
@@ -16,6 +16,7 @@ class Business: NSObject {
     let distance: String?
     let ratingImage: UIImage?
     let reviewCount: NSNumber?
+    let isClosed: Bool?
     
     init(dictionary: NSDictionary) {
         name = dictionary["name"] as? String
@@ -101,6 +102,8 @@ class Business: NSObject {
         }
         
         reviewCount = dictionary["review_count"] as? NSNumber
+        
+        self.isClosed = dictionary["is_closed"] as? Bool
     }
     
     class func businesses(array: [NSDictionary]) -> [Business] {

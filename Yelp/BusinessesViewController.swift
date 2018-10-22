@@ -12,6 +12,7 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
     var isMoreDataLoading = false
     var currentOffset = 0
     var businesses: [Business]!
+    var selectedBusiness: Business?
     
     @IBOutlet weak var tableView: UITableView! {
         didSet {
@@ -72,9 +73,10 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         return cell
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedBusiness = businesses[indexPath.row]
+        performSegue(withIdentifier: "ShowBusinessDetail", sender: self)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     // MARK: - UIScrollView Delegate methods
@@ -115,6 +117,10 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
             case "ShowMap":
                 if let dvc = segue.destination as? MapViewController {
                     dvc.businesses = self.businesses
+                }
+            case "ShowBusinessDetail":
+                if let dvc = segue.destination as? BusinessDetailViewController {
+                    dvc.business = selectedBusiness
                 }
             default:
                 break
