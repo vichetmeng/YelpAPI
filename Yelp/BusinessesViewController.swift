@@ -8,18 +8,29 @@
 
 import UIKit
 
-class BusinessesViewController: UIViewController {
-    
+class BusinessesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UIScrollViewDelegate {
+    var isMoreDataLoading = false
+    var currentOffset = 0
     var businesses: [Business]!
     
+    @IBOutlet weak var tableView: UITableView! {
+        didSet {
+            tableView.delegate = self
+            tableView.dataSource = self
+            tableView.rowHeight = UITableView.automaticDimension
+            tableView.estimatedRowHeight = 120
+            
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Business.searchWithTerm(term: "Thai", completion: { (businesses: [Business]?, error: Error?) -> Void in
+        Business.searchWithTerm(term: "boba", completion: { (businesses, error) -> Void in
             
                 self.businesses = businesses
                 if let businesses = businesses {
                     for business in businesses {
+                        self.tableView.reloadData()
                         print(business.name!)
                         print(business.address!)
                     }
@@ -27,6 +38,8 @@ class BusinessesViewController: UIViewController {
             
             }
         )
+        
+        createSearchBar()
         
         /* Example of Yelp search with more search options specified
          Business.searchWithTerm(term: "Restaurants", sort: .distance, categories: ["asianfusion", "burgers"]) { (businesses, error) in
@@ -40,9 +53,61 @@ class BusinessesViewController: UIViewController {
         
     }
     
+    func createSearchBar() {
+        let searchBar = UISearchBar()
+        searchBar.delegate = self
+        searchBar.placeholder = "Yelp Search"
+        
+        self.navigationItem.titleView = searchBar
+    }
+    
+    // MARK: - UITableView datasource and delegate methods
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return businesses?.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "BusinessCell") as! BusinessCellTableViewCell
+        cell.business = businesses[indexPath.row]
+        
+        return cell
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    // MARK: - UIScrollView Delegate methods
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if (!isMoreDataLoading) {
+            // Calculate the position of one screen length before the bottom of the results
+            let scrollViewContentHeight = tableView.contentSize.height
+            let scrollOffsetThreshold = scrollViewContentHeight - tableView.bounds.size.height
+            // When the user has scrolled past the threshold, start requesting
+            if (scrollView.contentOffset.y > scrollOffsetThreshold && tableView.isDragging) {
+                isMoreDataLoading = true
+                // Load more results
+                loadMoreData()
+            }
+        }
+    }
+    
+    func loadMoreData() {
+        currentOffset+=20
+        Business.searchWithTerm(term: "boba",offset:currentOffset,completion: { (businesses, error) -> Void in
+            self.isMoreDataLoading = false
+            self.businesses.append(contentsOf:businesses!)
+            if let businesses = businesses {
+                for business in businesses {
+                    self.tableView.reloadData()
+                    print(business.name!)
+                    print(business.address!)
+                }
+            }
+            
+        }
+        )
     }
     
     /*
