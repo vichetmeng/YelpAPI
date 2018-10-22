@@ -57,7 +57,6 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         let searchBar = UISearchBar()
         searchBar.delegate = self
         searchBar.placeholder = "Yelp Search"
-        
         self.navigationItem.titleView = searchBar
     }
     
@@ -108,6 +107,19 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
             
         }
         )
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier {
+            switch(identifier) {
+            case "ShowMap":
+                if let dvc = segue.destination as? MapViewController {
+                    dvc.businesses = self.businesses
+                }
+            default:
+                break
+            }
+        }
     }
     
     /*
